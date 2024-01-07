@@ -1,0 +1,19 @@
+@if (drink) {
+  <div class="drink-details-card">
+    <img [src]="drink.strDrinkThumb" alt="{{ drink.strDrink }}" class="drink-details-image"/>
+    <h2 class="drink-details-title">{{ drink.strDrink }}</h2>
+    <h3 class="drink-details-subtitle">Ingredients:</h3>
+    <ul class="drink-ingredients-list">
+      @if (drink.strIngredient1 && drink.strMeasure1) {
+        <li>{{ drink.strIngredient1 }} - {{ drink.strMeasure1 }}</li>
+      }
+    </ul>
+    <h3 class="drink-details-subtitle">Instructions:</h3>
+    <p class="drink-details-instructions">{{ drink.strInstructions }}</p>
+  </div>
+} @else {
+  <div class="drink-details-card">
+    Not Available!
+  </div>
+}
+

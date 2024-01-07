@@ -1,0 +1,9 @@
+@for (drink of drinks; track drink.idDrink) {
+  <div class="drink-card">
+    <img [src]="drink.strDrinkThumb" alt="{{ drink.strDrink }}" class="drink-image"/>
+    <h3 class="drink-title">{{ drink.strDrink }}</h3>
+    <a [routerLink]="['/drink', drink.idDrink]" class="details-link">Details</a>
+  </div>
+} @empty {
+  <div>There is not any drinks available!</div>
+}
