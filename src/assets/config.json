@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://www.thecocktaildb.com/api/json/v1/1",
+  "appName": "WLA Drinks",
+  "branding": {
+    "favicon": "assets/logos/wla-logo.png",
+    "companyName": "White Label Company"
+  }
+}

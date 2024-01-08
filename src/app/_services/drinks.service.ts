@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {DrinkDetails} from "../_models/drink-details";
 import {Drink} from "../_models/drink";
+import {ConfigService} from "./config.service";
 
 /** Service for fetching drink-related data from the API. */
 @Injectable({
@@ -10,13 +11,15 @@ import {Drink} from "../_models/drink";
 })
 export class DrinksService {
   /** Base URL for APIs. */
-  private baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1';
+  private baseUrl: string | undefined;
 
   /**
    * Creates an instance of DrinksService.
    * @param http - Angular's HttpClient for making HTTP requests.
+   * @param configService
    */
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.baseUrl = this.configService.getBaseUrl();
   }
 
   /**
