@@ -5,16 +5,20 @@
     <p class="mt-6 text-base leading-7 text-gray-600">Uncover a world of flavor in our site, where each click opens the door to a unique beverage experience.</p>
   </div>
 
-  @for (drink of drinks; track drink.idDrink) {
-    <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-      <a [routerLink]="['/drink', drink.idDrink]">
-        <img [src]="drink.strDrinkThumb" alt="{{ drink.strDrink }}" class="h-80 w-72 object-cover rounded-t-xl"/>
-        <div class="px-4 py-3 w-72">
-          <p class="font-bold truncate block capitalize">{{ drink.strDrink }}</p>
-        </div>
-      </a>
-    </div>
-  } @empty {
-    <div>There is not any drinks available!</div>
+  @if (!isLoading) {
+    @for (drink of drinks; track drink.idDrink) {
+      <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <a [routerLink]="['/drink', drink.idDrink]">
+          <img [src]="drink.strDrinkThumb" alt="{{ drink.strDrink }}" class="h-80 w-72 object-cover rounded-t-xl"/>
+          <div class="px-4 py-3 w-72">
+            <p class="font-bold truncate block capitalize">{{ drink.strDrink }}</p>
+          </div>
+        </a>
+      </div>
+    } @empty {
+      <div>There is not any drinks available!</div>
+    }
+  } @else {
+    Loading...
   }
 </section>

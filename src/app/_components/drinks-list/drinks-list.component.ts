@@ -14,6 +14,8 @@ import {Drink} from "../../_models/drink";
 export class DrinksListComponent implements OnInit {
   /** Array to store the list of drinks. */
   drinks: Drink[] = [];
+  /* A flag which indicates the data is loading */
+  isLoading: boolean = false;
 
   /**
    * Constructor with dependency injection for the DrinksService.
@@ -27,8 +29,11 @@ export class DrinksListComponent implements OnInit {
    * and subscribes to the observable to get data and update the 'drinks' array.
    */
   ngOnInit(): void {
+    this.isLoading = true;
     this.drinksService.getDrinks().subscribe((data) => {
       this.drinks = data;
+    }).add(() => {
+      this.isLoading = false;
     });
   }
 }

@@ -20,6 +20,9 @@ export class DrinkDetailsComponent implements OnInit {
   /** Array to store recipes in different languages for the drink. */
   recipes: { language: string, instructions: string }[] = [];
 
+  /* A flag which indicates the data is loading */
+  isLoading: boolean = false;
+
   /**
    * Constructor with dependency injection for ActivatedRoute and DrinksService.
    * @param route - The route activated to get the drink details.
@@ -36,10 +39,13 @@ export class DrinkDetailsComponent implements OnInit {
   ngOnInit(): void {
     const drinkId: string | null = this.route.snapshot.paramMap.get('id');
     if (drinkId) {
+      this.isLoading = true;
       this.drinksService.getDrinkDetails(drinkId).subscribe((data) => {
         this.drink = data;
         this.setIngredients();
         this.setRecipes();
+      }).add(() => {
+        this.isLoading = false;
       });
     } else {
       console.error('An error occurred while fetching the drink details: No Drink ID.');
