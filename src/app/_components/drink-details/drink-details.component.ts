@@ -59,7 +59,7 @@ export class DrinkDetailsComponent implements OnInit {
       const ingredient = this.drink?.['strIngredient' + i];
       if (ingredient) {
         const measure = this.drink?.['strMeasure' + i] || '';
-        ingredients.push(`${measure.trim()} of ${ingredient}`);
+        ingredients.push(measure ? `${measure.trim()} of ${ingredient}` : ingredient);
       }
     }
     this.ingredients = ingredients;

@@ -13,7 +13,6 @@ import {ConfigService} from "./_services/config.service";
 })
 export class AppComponent implements OnInit {
   appName: string = 'DefaultAppName';
-  logo: string = 'assets/default-logos.png';
 
   constructor(private titleService: Title, private configService: ConfigService) {
   }
