@@ -50,5 +50,5 @@ export interface DrinkDetails extends Drink {
   strImageAttribution?: string;
   strCreativeCommonsConfirmed?: string;
   dateModified?: string;
-  [key: string]: string | undefined;
+  [key: string]: any;
 }

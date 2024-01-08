@@ -1,19 +1,37 @@
-@if (drink) {
-  <div class="drink-details-card">
-    <img [src]="drink.strDrinkThumb" alt="{{ drink.strDrink }}" class="drink-details-image"/>
-    <h2 class="drink-details-title">{{ drink.strDrink }}</h2>
-    <h3 class="drink-details-subtitle">Ingredients:</h3>
-    <ul class="drink-ingredients-list">
-      @if (drink.strIngredient1 && drink.strMeasure1) {
-        <li>{{ drink.strIngredient1 }} - {{ drink.strMeasure1 }}</li>
-      }
-    </ul>
-    <h3 class="drink-details-subtitle">Instructions:</h3>
-    <p class="drink-details-instructions">{{ drink.strInstructions }}</p>
-  </div>
-} @else {
-  <div class="drink-details-card">
-    Not Available!
-  </div>
-}
+<div class="flex justify-center my-10">
+  <div class="text-start max-w-xl p-4 border border-gray-300 rounded shadow-md bg-white">
+    @if (drink) {
+      <h2 class="text-2xl font-bold mb-4 mt-0">{{ drink.strDrink }}</h2>
+      <img [src]="drink.strDrinkThumb" alt="{{ drink.strDrink }}" class="w-full rounded my-4">
 
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">Ingredients</h3>
+        <ul class="list-disc mb-0 pl-4">
+          @for (ingredient of ingredients; track drink.idDrink) {
+            <li class="mb-1">{{ ingredient }}</li>
+          }
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-2">
+          @if (recipes.length === 1) {
+            Recipe
+          } @else if (recipes.length > 1) {
+            Recipe in different languages
+          }
+        </h3>
+        @for (recipe of recipes; track drink.idDrink) {
+          <div class="flex mb-2">
+            <h4 class="font-bold min-w-8">{{ recipe.language }}</h4>
+            <p class="self-start">{{ recipe.instructions }}</p>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="drink-details-card">
+        Not Available!
+      </div>
+    }
+  </div>
+</div>

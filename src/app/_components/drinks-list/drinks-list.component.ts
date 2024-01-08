@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DrinksService} from '../../_services/drinks.service';
 import {RouterLink} from "@angular/router";
+import {Drink} from "../../_models/drink";
 
+/** Component to display a list of drinks. */
 @Component({
   selector: 'app-drinks-list',
   styleUrl: './drinks-list.component.scss',
@@ -10,14 +12,23 @@ import {RouterLink} from "@angular/router";
   standalone: true
 })
 export class DrinksListComponent implements OnInit {
-  drinks: any[] = [];
+  /** Array to store the list of drinks. */
+  drinks: Drink[] = [];
 
-  constructor(private drinksService: DrinksService) {
-  }
+  /**
+   * Constructor with dependency injection for the DrinksService.
+   * @param drinksService - The service to fetch drinks data.
+   */
+  constructor(private drinksService: DrinksService) {}
 
+  /**
+   * Lifecycle hook called after the component has been initialized.
+   * Calls the 'getDrinks' method from the DrinksService
+   * and subscribes to the observable to get data and update the 'drinks' array.
+   */
   ngOnInit(): void {
-    this.drinksService.getAlcoholicDrinks().subscribe((data) => {
-      this.drinks = data.drinks;
+    this.drinksService.getDrinks().subscribe((data) => {
+      this.drinks = data;
     });
   }
 }
