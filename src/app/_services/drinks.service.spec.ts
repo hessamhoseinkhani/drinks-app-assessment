@@ -1,6 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { DrinksService } from './drinks.service';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {DrinksService} from './drinks.service';
+import {ConfigService} from './config.service';
 
 describe('DrinksService', () => {
   let service: DrinksService;
@@ -9,39 +10,48 @@ describe('DrinksService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [DrinksService],
+      providers: [DrinksService, ConfigService],
     });
 
     service = TestBed.inject(DrinksService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => {
-    httpTestingController.verify();
-  });
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should retrieve alcoholic drinks', () => {
-    const mockResponse = {
-      drinks: [
-        { idDrink: '1', strDrink: 'Drink 1' },
-        { idDrink: '2', strDrink: 'Drink 2' },
-      ],
-    };
+  it('should get list of drinks', () => {
+    const mockResponse = {drinks: [{idDrink: '1', strDrink: 'Mock Drink'}]};
 
     service.getDrinks().subscribe((drinks) => {
-      expect(drinks.length).toBe(2);
-      expect(drinks[0].idDrink).toBe('1');
-      expect(drinks[1].strDrink).toBe('Drink 2');
+      expect(drinks).toBeTruthy();
+      expect(drinks?.length).toBe(1);
+      expect(drinks![0].idDrink).toBe('1');
+      expect(drinks![0].strDrink).toBe('Mock Drink');
     });
 
-    const req = httpTestingController.expectOne(`${service.baseUrl}/filter.php?a=Alcoholic`);
+    const req = httpTestingController.expectOne(`${service['baseUrl']}/filter.php?a=Alcoholic`);
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
 
-  // Add more test cases for other methods as needed
+  it('should get drink details', () => {
+    const mockResponse = {drinks: [{idDrink: '1', strDrink: 'Mock Drink'}]};
+    const drinkId = '1';
+
+    service.getDrinkDetails(drinkId).subscribe((drinkDetails) => {
+      expect(drinkDetails).toBeTruthy();
+      expect(drinkDetails?.idDrink).toBe('1');
+      expect(drinkDetails?.strDrink).toBe('Mock Drink');
+    });
+
+    const req = httpTestingController.expectOne(`${service['baseUrl']}/lookup.php?i=${drinkId}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
 });
