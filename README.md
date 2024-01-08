@@ -1,6 +1,32 @@
-# DrinksApp
+# White-Label App (WLA Drinks App) Documentation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+Welcome to the documentation for our White-Label App (WLA). This document provides insights into the structure of the project, how UI elements can be managed/altered through the JSON object.
+
+## Project Overview
+
+This Angular application serves as a White-Label App that can be branded and configured using a JSON object. The JSON object acts as an instruction set.
+
+## Configuration Through JSON
+
+UI elements can be customized using the configuration provided in the `assets/config.json` file. The structure of the JSON object includes properties for app name, logo, and other branding details.
+
+Example `config.json`:
+
+```json
+{
+  "baseUrl": "https://www.thecocktaildb.com/api/json/v1/1",
+  "appName": "WLA Drinks",
+  "branding": {
+    "favicon": "assets/logos/wla-logo.png",
+    "companyName": "White Label Company"
+  }
+}
+```
+
+### Configuration Properties
+
+- **appName**: The name of the White-Label App.
+- **logo**: The path to the custom logo image file.
 
 ## Development server
 
