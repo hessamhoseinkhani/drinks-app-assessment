@@ -1,22 +1,21 @@
-name: Your Workflow Name
+name: UPDATE_APP_ACTION
 
 on:
   push:
     branches:
-      - master  # Adjust this according to your branch name
-
+      - master
 jobs:
-  your-job-name:
+  update-readme-with-appinfo:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      # Add your other steps here
-
-      - name: Use Secret in Workflow
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: setup node
+        uses: actions/setup-node@v1
+      - name: Install dependencies
+        run: npm install
+      - name: Generate README file
+        run: node index.js
         env:
-          MY_API_KEY: ${{ secrets.MY_API_KEY }}  # Reference the secret here
-        run: |
-          # Use MY_API_KEY in your commands
-          echo "Using API key: $MY_API_KEY"
+          MY_API_KEY: ${{secrets.MY_API_KEY}}
