@@ -16,6 +16,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Generate README file
-        run: node main.ts
         env:
-          MY_API_KEY: ${{secrets.MY_API_KEY}}
+          MY_API_KEY: ${{secrets.MY_API_KEY}}  # Reference the secret here
+        run: |
+          # Use MY_API_KEY in your commands
+          echo "Using API key: $MY_API_KEY"
