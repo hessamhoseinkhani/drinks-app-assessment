@@ -3,7 +3,7 @@ name: Your Workflow Name
 on:
   push:
     branches:
-      - main  # Adjust this according to your branch name
+      - master  # Adjust this according to your branch name
 
 jobs:
   your-job-name:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      
+
       # Add your other steps here
 
       - name: Use Secret in Workflow
