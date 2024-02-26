@@ -20,4 +20,4 @@ jobs:
           MY_API_KEY: ${{secrets.MY_API_KEY}}  # Reference the secret here
         run: |
           # Use MY_API_KEY in your commands
-          echo "this is the code: $MY_API_KEY"
+          echo "this is the qwe: ${{secrets.MY_API_KEY}}"
